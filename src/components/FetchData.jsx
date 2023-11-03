@@ -37,12 +37,18 @@ const FetchData = () => {
             <div className="p-8 rounded-md shadow-md bg-slate-500">
                 <h1 className="mb-4 text-2xl font-bold text-center text-gray-100">Postal Code Location App</h1>
                 <PostalCodeForm onSubmit={fetchLocationInfo} />
-                {loading && <p className="text-blue-500">Loading...</p>}
-                {error && <p className="text-red-500">{error}</p>}
-                <LocationInfo location={location} clearLocation={clearLocation} />
+                {loading ? (
+                    <div className="flex items-center justify-center">
+                        <div className="w-16 h-16 border-t-4 border-b-4 border-gray-300 rounded-full animate-spin"></div>
+                    </div>
+                ) : error ? (
+                    <p className="text-red-500">{error}</p>
+                ) : location ? (
+                    <LocationInfo location={location} clearLocation={clearLocation} />
+                ) : null}
             </div>
         </div>
-    )
+    );
 }
 
-export default FetchData
+export default FetchData;
